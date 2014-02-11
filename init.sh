@@ -44,12 +44,21 @@ else
   exit 1
 fi
 
+# install zsh
+sudo apt-get install zsh
+
 # install git
 if sudo apt-get install git -y
 then
   echo "Git intstalled"
 	git clone https://github.com/kajohansen/my-zsh.git
 	echo "my-zsh installed"
+	mv my-zsh/zshrc ./.zshrc
+	echo "zshrc moved to home folder ."
+	mv my-zsh .my-zsh
+	echo "my-zsh moved to .my-zsh"
+	sudo chsh -s /bin/zsh ubuntu
+	echo "changed shell for user ubuntu to zsh"
 else
 	echo "Error installing git.."
 	exit 1
