@@ -36,7 +36,7 @@ else
 	exit 1
 fi
 # create the master zone file
-ZMASTER=";\n\$TTL    604800\n@ IN SOA mserve.kajohansen.com. postmaster.kajohansen.com. (\n\t2       ; Serial\n\t604800  ; Refresh\n\t3600    ; Retry\n\t604800  ; Expire\n\t38400 ) ; Negative Cache TTL\n;\n@         IN NS mserve.kajohansen.com.\n@         IN A 10.0.0.$NUM\nmserve    IN A 10.0.0.$NUM\nmserve    IN    MX    10 mserve.kajohansen.com.\n_kerberos       TXT     'KAJOHANSEN.COM'\n_kerberos._tcp          SRV 0 0 88  mserve.kajohansen.com.\n_kerberos._udp          SRV 0 0 88  mserve.kajohansen.com.\n_ldap._tcp              SRV 0 0 389 mserve.kajohansen.com.\n_kpasswd._tcp           SRV 0 0 464 mserve.kajohansen.com.\n_kerberos-adm._tcp      SRV 0 0 749 mserve.kajohansen.com.\n" 
+ZMASTER=";\n\$TTL 604800\n@ IN SOA mserve.kajohansen.com. postmaster.kajohansen.com. (\n\t2 \t; Serial\n\t604800  \t; Refresh\n\t3600 \t; Retry\n\t604800 \t; Expire\n\t38400 ) ; Negative Cache TTL\n;\n@ \tIN \tNS \tmserve.kajohansen.com.\n@ \tIN \tA \t10.0.0.$NUM\nmserve \tIN \tA \t10.0.0.$NUM\nmserve \tIN \tMX \t10 mserve.kajohansen.com.\n\n_kerberos \tTXT \tKAJOHANSEN.COM\n\n_kerberos._tcp \t\tSRV 0 0 88  mserve.kajohansen.com.\n_kerberos._udp \t\tSRV 0 0 88  mserve.kajohansen.com.\n_ldap._tcp \t\tSRV 0 0 389 mserve.kajohansen.com.\n_kpasswd._tcp \t\tSRV 0 0 464 mserve.kajohansen.com.\n_kerberos-adm._tcp \tSRV 0 0 749 mserve.kajohansen.com.\n" 
 if sudo touch /etc/bind/zones/kajohansen.com.db
 then
 	echo "Master zone file created"
