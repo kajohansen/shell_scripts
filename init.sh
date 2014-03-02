@@ -49,18 +49,30 @@ fi
 # install zsh
 sudo apt-get install zsh
 
+# add user superuser
+if sudo useradd superuser ; then
+	echo "Added user superuser"
+	if sudo useradd superuser sudo ; then
+		echo "Superuser added to sudo group"
+	else
+		echo "Error adding superuser to sudo group"
+		exit 1
+	fi
+else
+	echo "Error adding user superuser"
+	exit 1
+fi
+
 # install git
 if sudo apt-get install git -y
 then
   echo "Git intstalled"
-	git clone https://github.com/kajohansen/my-zsh.git
+	git clone https://github.com/kajohansen/my-zsh.git /home/superuser/.my-zsh
 	echo "my-zsh installed"
-	mv my-zsh/zshrc ~/.zshrc
-	echo "zshrc moved to home folder ."
-	mv my-zsh ~/.my-zsh
-	echo "my-zsh moved to .my-zsh"
-	sudo chsh -s /bin/zsh $USERNAME
-	echo "changed shell for user ubuntu to zsh"
+	mv /home/superuser/my-zsh/zshrc /home/superuser/.zshrc
+	echo "zshrc moved to superuser home folder ."
+	sudo chsh -s /bin/zsh superuser
+	echo "changed shell for user superuser to zsh"
 else
 	echo "Error installing git.."
 	exit 1
