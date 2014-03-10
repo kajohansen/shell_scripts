@@ -8,9 +8,9 @@ then
   echo "Got hostname $HOSTNAME"
   echo "Got username $USERNAME"
   echo "/home/$USERNAME/.ssh directory created"
-  if ssh-keygen -q -t rsa -b 4096 -C "Key for $USERNAME on $HOSTNAME" -f "/home/$USERNAME/.ssh/superuser-$HOSTNAME"
+  if ssh-keygen -q -t rsa -b 4096 -C "Key for $USERNAME on $HOSTNAME" -f "/home/$USERNAME/.ssh/$USERNAME-$HOSTNAME"
   then
-    echo "/home/$SUPERUSER/.ssh/superuser-$HOSTNAME created successfuly"
+    echo "/home/$USERNAME/.ssh/superuser-$HOSTNAME created successfuly"
   else
    echo "Error creating /home/$USERNAME/.ssh/superuser-$HOSTNAME"
   fi

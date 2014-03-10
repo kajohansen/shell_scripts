@@ -3,12 +3,14 @@
 # AWS initial setup script
 #
 
-# change host to google dns and set hostname to mserve
+# change host to google dns and set hostname to computer hostname
+HOSTNAME=`hostname`
+USERNAME=`whoami`
 sudo sed -i 's/127.0.0.1/8.8.8.8/g' /etc/resolv.conf
-sudo sed -i 's/.*/mserve/g' /etc/hostname
+sudo sed -i "s/.*/$HOSTNAME/g" /etc/hostname
 
 # check to see that the hostname got updated
-if grep '8.8.8.8' /etc/resolv.conf && grep 'mserve' /etc/hostname
+if grep '8.8.8.8' /etc/resolv.conf && grep $HOSTNAME /etc/hostname
 then
   echo "Got google host"
 	echo "Hostname is set to:" && hostname
@@ -53,11 +55,11 @@ then
   echo "Git intstalled"
 	git clone https://github.com/kajohansen/my-zsh.git
 	echo "my-zsh installed"
-	mv my-zsh/zshrc ./.zshrc
+	mv my-zsh/zshrc ~/.zshrc
 	echo "zshrc moved to home folder ."
-	mv my-zsh .my-zsh
+	mv my-zsh ~/.my-zsh
 	echo "my-zsh moved to .my-zsh"
-	sudo chsh -s /bin/zsh ubuntu
+	sudo chsh -s /bin/zsh $USERNAME
 	echo "changed shell for user ubuntu to zsh"
 else
 	echo "Error installing git.."
@@ -65,4 +67,5 @@ else
 fi
 
 # done restart
-sudo shutdown -r now
+echo "DONE restart is commented out"
+#sudo shutdown -r now
